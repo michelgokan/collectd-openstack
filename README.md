@@ -30,8 +30,8 @@ in `/opt/collectd/etc/collectd.conf`:
         BaseName "Collectd::Plugins"
         LoadPlugin "OpenStack"
         <Plugin "openstack">
+           OpenStackControllerMySQLBindAddress "127.0.0.1"
            MySQLRootPassword "root"
-           ConnectUsingDBConnection "true"
 	</Plugin>
 </Plugin>
 ...
