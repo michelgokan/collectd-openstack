@@ -24,22 +24,22 @@ sub openstack_read
 {
 	my $v = {
 		plugin   => "openstack",
-		type	=> "percent",
+		type	=> "gauge",
 		time     => time,
 	};
 
 	my $myConnection = DBI->connect("DBI:mysql:novadb:$CONFIG{OpenStackControllerMySQLBindAddress}", "root", "$CONFIG{MySQLRootPassword}") or die "Unable to connect: $DBI::errstr\n";
 
 
-	my $columns_to_select = "vcpus,memory_mb,vcpus_used,memory_mb_used,local_gb_used,cpu_info,disk_available_least,free_ram_mb,free_disk_gb,running_vms,hypervisor_hostname,deleted,host_ip,supported_instances,ram_allocation_ratio,cpu_allocation_ratio,uuid,disk_allocation_ratio,mapped";
+	my $columns_to_select = "vcpus,memory_mb,vcpus_used,memory_mb_used,local_gb_used,disk_available_least,free_ram_mb,free_disk_gb,running_vms,deleted,ram_allocation_ratio,cpu_allocation_ratio,disk_allocation_ratio,mapped";
 
    my $query = $myConnection->prepare("select host,$columns_to_select from compute_nodes");
    my $result = $query->execute();
 
    my @columns = split /,/, $columns_to_select;
 
-	while(my @row = $result->fetchrow_array()){
-		my $counter = 0;
+	while(my @row = $query->fetchrow_array){
+		my $counter = 1;
 		foreach my $column (@columns) {
                     $v->{'plugin_instance'} = "$row[0]",
                     $v->{'type_instance'} = "$column",
@@ -48,8 +48,8 @@ sub openstack_read
 		}
 	}
 
-	$result->finish();
-	$result->disconnect();
+	$query->finish();
+	$myConnection->disconnect;
 	
 	return 1;
 }
@@ -64,7 +64,7 @@ sub openstack_config
 		my @values = $_->{values};
 
 		my $value = $_->{values}->[0];
-		plugin_log(LOG_NOTICE, "TOP CONF - Inside foreach $key / $value");
+		plugin_log(LOG_NOTICE, "OpenStack CONF - Inside foreach $key / $value");
 	
 		if ($key eq "openstackcontrollermysqlbindaddress") {
 			$CONFIG{OpenStackControllerMySQLBindAddress} = $value;
