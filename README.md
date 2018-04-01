@@ -30,17 +30,9 @@ in `/opt/collectd/etc/collectd.conf`:
         BaseName "Collectd::Plugins"
         LoadPlugin "OpenStack"
         <Plugin "openstack">
-           OpenStackUserName "admin"
-			  OpenStackPassword "adminPasswordHere"
-			  OpenStackProjectName "admin"
-			  OpenStackAuthUrl "http://172.16.16.110:35357/v3"
-			  OpenStackVolumeAPIVersion "2"
-			  OpenStackIdentityAPIVersion "3"
-			  OpenStackProjectDomainName "default"
-			  OpenStackUserDomainName "default"
            MySQLRootPassword "root"
            ConnectUsingDBConnection "true"
-		  </Plugin>
+	</Plugin>
 </Plugin>
 ...
 ````
