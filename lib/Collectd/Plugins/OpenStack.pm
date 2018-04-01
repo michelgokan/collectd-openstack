@@ -40,11 +40,11 @@ sub openstack_read
 
 	while(my @row = $result->fetchrow_array()){
 		my $counter = 0;
-		foreach $column (@columns) {
-         $v->{'plugin_instance'} = "$row[0]",
-         $v->{'type_instance'} = "$column",
-         $v->{'values'} = [ $row[$counter++] ],
-         plugin_dispatch_values($v);
+		foreach my $column (@columns) {
+                    $v->{'plugin_instance'} = "$row[0]",
+                    $v->{'type_instance'} = "$column",
+                    $v->{'values'} = [ $row[$counter++] ],
+                    plugin_dispatch_values($v);
 		}
 	}
 
