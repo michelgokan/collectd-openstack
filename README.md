@@ -39,9 +39,9 @@ in `/opt/collectd/etc/collectd.conf`:
 
 ## DEPENDENCIES
 
-OpenStack Pike or Ocata
-collectd
-perl
+* OpenStack Pike or Ocata
+* collectd
+* perl
 
 ## COPYRIGHT AND LICENCE
 
