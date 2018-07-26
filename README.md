@@ -1,4 +1,4 @@
-# collectd-openstack - A collectd plugin to report OpenStack related statistics
+# openstack-collectd - A collectd plugin to report OpenStack related statistics
 =================================
 
 A collectd plugin to send OpenStack related information such as VMs location, hardware configuration, compute nodes and etc. Its written in a way that you can easily extend and add more info based on your need. I expect you to commit your useful changes here, so that everyone can use it.
